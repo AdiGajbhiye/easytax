@@ -1,0 +1,18 @@
+{
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  },
+  "name": "easytax",
+  "version": "1.0.0",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.17.3",
+    "passport": "^0.5.2"
+  },
+  "scripts": {
+    "start": "lerna run start",
+    "test": "lerna run test",
+    "new-version": "lerna version --conventional-commits --yes",
+    "diff": "lerna diff"
+  }
+}
