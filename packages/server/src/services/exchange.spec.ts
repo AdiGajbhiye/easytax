@@ -1,5 +1,11 @@
-import { listExchanges } from "./exchange";
+import { listExchanges, listTransactions } from "./exchange";
 
-test("this is test", () => {
+test("listExchanges", () => {
   console.log(listExchanges());
+});
+
+test("listTransactions", async () => {
+  const transactions = await listTransactions();
+  console.log(transactions);
+  console.log(transactions.length);
 });
