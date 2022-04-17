@@ -1,5 +1,5 @@
 import ccxt, { Order } from "ccxt";
-import "dotenv/config";
+import { BINANCE_API_KEY, BINANCE_API_SECRET } from "@config/config";
 
 const listExchanges = () => {
   return ccxt.exchanges;
@@ -7,8 +7,8 @@ const listExchanges = () => {
 
 const listTransactions = async () => {
   const exchange = new ccxt.binance({
-    apiKey: process.env.BINANCE_API_KEY,
-    secret:  process.env.BINANCE_API_SECRET,
+    apiKey: BINANCE_API_KEY,
+    secret: BINANCE_API_SECRET,
   });
   const markets = await exchange.loadMarkets();
   const symbols = Object.keys(markets);
@@ -21,7 +21,7 @@ const listTransactions = async () => {
       j++;
       transactions.push(...result);
     }
-    if (j > 5) {
+    if (j > 1) {
       break;
     }
   }

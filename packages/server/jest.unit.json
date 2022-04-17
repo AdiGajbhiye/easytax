@@ -2,5 +2,9 @@
   "preset": "ts-jest",
   "testMatch": ["**/?(*.)+(spec).ts"],
   "resetMocks": true,
-  "clearMocks": true
+  "clearMocks": true,
+  "rootDir": "./src",
+  "moduleNameMapper": {
+    "@config/(.*)": "<rootDir>/config/$1"
+  }
 }
