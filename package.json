@@ -12,6 +12,7 @@
   "scripts": {
     "start": "lerna run start",
     "test": "lerna run test",
+    "test:server": "lerna run test --scope=server",
     "new-version": "lerna version --conventional-commits --yes",
     "diff": "lerna diff"
   }
