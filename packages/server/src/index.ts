@@ -3,6 +3,7 @@ import { MONGO_URI, PORT } from "@config/config";
 import mongoose from "mongoose";
 import { urlencoded, json } from "body-parser";
 import userRoutes from "@routes/users";
+import transactionRoutes from "@routes/transactions";
 
 const NAMESPACE = "Server";
 const app = express();
@@ -20,5 +21,6 @@ app.use(urlencoded({ extended: true }));
 app.use(json());
 
 app.use("/api/users", userRoutes);
+app.use("/api/transactions", transactionRoutes);
 
 app.listen(PORT, () => console.log("Server running"));
