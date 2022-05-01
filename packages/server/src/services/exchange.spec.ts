@@ -5,5 +5,14 @@ test("listExchanges", () => {
 });
 
 test("listTransactions", async () => {
-  await listTransactions(console.log);
+  await listTransactions(
+    "binance",
+    {
+      apiKey:
+        "f9aCczHftjEdJ7NgmuUiIUPhLgE3VaZyLKx4WOUXeLXNnNSusS2BY53K4n2d081c",
+      secret:
+        "LixPanbCCFPWdnnuh6G5whm4r7U4rHMLy4OhVcLt22NRBl4NS618bXxokgxMiRI4",
+    },
+    console.log
+  );
 });
