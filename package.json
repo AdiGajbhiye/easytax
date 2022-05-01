@@ -7,11 +7,14 @@
   "dependencies": {
     "body-parser": "^1.20.0",
     "express": "^4.17.3",
-    "mongoose": "^6.3.0",
+    "mongoose": "^6.3.1",
     "passport": "^0.5.2"
   },
   "scripts": {
     "start": "lerna run start",
+    "start:server": "lerna run start --scope=server",
+    "dev": "lerna run dev",
+    "dev:server": "lerna run dev --scope=server",
     "test": "lerna run test",
     "test:server": "lerna run test --scope=server",
     "new-version": "lerna version --conventional-commits --yes",

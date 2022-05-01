@@ -1,5 +1,5 @@
 import express from "express";
-import { MONGO, PORT } from "@config/config";
+import { MONGO_URI, PORT } from "@config/config";
 import mongoose from "mongoose";
 import { urlencoded, json } from "body-parser";
 import userRoutes from "@routes/users";
@@ -8,7 +8,7 @@ const NAMESPACE = "Server";
 const app = express();
 
 mongoose
-  .connect(MONGO.url, MONGO.options)
+  .connect(MONGO_URI)
   .then((result) => {
     console.log(NAMESPACE, "Mongo Connected");
   })

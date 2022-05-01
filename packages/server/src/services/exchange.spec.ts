@@ -5,7 +5,5 @@ test("listExchanges", () => {
 });
 
 test("listTransactions", async () => {
-  const transactions = await listTransactions();
-  console.log(transactions);
-  console.log(transactions.length);
+  await listTransactions(console.log);
 });
