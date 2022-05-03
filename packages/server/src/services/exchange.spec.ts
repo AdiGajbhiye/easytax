@@ -1,9 +1,5 @@
 import { Trade } from "ccxt";
-import { listExchanges, listTransactions } from "./exchange";
-
-test("listExchanges", () => {
-  console.log(listExchanges());
-});
+import { listTransactions } from "./exchange";
 
 jest.setTimeout(10000);
 test("listTransactions", async () => {
@@ -12,14 +8,13 @@ test("listTransactions", async () => {
     "binance",
     {
       apiKey:
-        "f9aCczHftjEdJ7NgmuUiIUPhLgE3VaZyLKx4WOUXeLXNnNSusS2BY53K4n2d081c",
+        "BZsn6iTHBcFdvQ6f5qaVCvmDUsMsgJKKXMPXF26TLcjfHY1O7DH9q7pGY2ACEDUx",
       secret:
-        "LixPanbCCFPWdnnuh6G5whm4r7U4rHMLy4OhVcLt22NRBl4NS618bXxokgxMiRI4",
+        "JG40vX4poc5rybQqMciGHIxiyFSQRGhmIVVptdu21AUcPiapnRS6GD7wiR3JSB9E",
     },
     (r) => {
       result.push(...r);
     }
   );
-  console.log(result);
   console.log(result.length);
 });

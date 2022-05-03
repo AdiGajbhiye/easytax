@@ -1,9 +1,5 @@
 import ccxt, { ExchangeId, Trade, Params } from "ccxt";
 
-const listExchanges = () => {
-  return ccxt.exchanges;
-};
-
 interface Config {
   apiKey: string;
   secret: string;
@@ -23,7 +19,7 @@ const listTransactions = async (
     let since = 0;
     let lastTrade: Trade | undefined = undefined;
     while (true) {
-      const result: Trade[] = await exchange.fetchMyTrades(symbol, since, 20);
+      const result: Trade[] = await exchange.fetchMyTrades('LUNAUSDT', since, 10);
       if (result.length === 0) break;
 
       if (!lastTrade) {
@@ -43,4 +39,4 @@ const listTransactions = async (
   }
 };
 
-export { listExchanges, listTransactions };
+export { listTransactions };
