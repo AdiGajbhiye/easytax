@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import TextField from '../../ui-kit/TextField';
+import TextField from '@ui-kit/TextField';
 
 interface LoginForm {
   email: string;
