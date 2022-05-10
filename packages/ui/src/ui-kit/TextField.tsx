@@ -34,7 +34,7 @@ function TextField({ name, label, formProps, error }: IProps) {
           </svg>
         )}
       </label>
-      {error && <p className="text-sm text-red-500">{error}</p>}
+      {error && <p className="text-sm text-red-500">{error.message}</p>}
     </div>
   );
 }
