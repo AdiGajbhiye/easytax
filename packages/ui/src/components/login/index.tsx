@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import TextField from '@ui-kit/TextField';
-import { UserSchema, User } from '@easytax/validator';
+import { User, UserSchema } from '@easytax/validator';
 
 function Login() {
   const {

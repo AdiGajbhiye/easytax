@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@easytax/validator": "^0.1.0",
+    "@easytax/validator": "workspace:*",
     "@hookform/resolvers": "^2.8.8",
     "classnames": "^2.3.1",
     "react": "^17.0.2",
