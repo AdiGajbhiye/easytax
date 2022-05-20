@@ -2,25 +2,15 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import TextField from '@ui-kit/TextField';
-import z from 'zod';
-
-interface LoginForm {
-  email: string;
-  password: string;
-}
-
-const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(8).max(20),
-});
+import { UserSchema, User } from '@easytax/validator';
 
 function Login() {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginForm>({ resolver: zodResolver(schema) });
-  const onSubmit: SubmitHandler<LoginForm> = (data) => console.log(data);
+  } = useForm<User>({ resolver: zodResolver(UserSchema) });
+  const onSubmit: SubmitHandler<User> = (data) => console.log(data);
 
   return (
     <div className="flex justify-center items-center h-screen">

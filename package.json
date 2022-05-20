@@ -2,6 +2,10 @@
   "devDependencies": {
     "lerna": "^4.0.0"
   },
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "name": "easytax",
   "version": "1.0.0",
   "dependencies": {
@@ -15,9 +19,11 @@
     "start:server": "lerna run start --scope=server",
     "dev": "lerna run dev",
     "dev:server": "lerna run dev --scope=server",
+    "dev:ui": "lerna run dev --scope=@easytax/client",
     "test": "lerna run test",
     "test:server": "lerna run test --scope=server",
     "new-version": "lerna version --conventional-commits --yes",
-    "diff": "lerna diff"
+    "diff": "lerna diff",
+    "clean": "lerna run clean"
   }
 }
