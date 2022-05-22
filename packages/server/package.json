@@ -1,8 +1,7 @@
 {
   "name": "@easytax/server",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.ts",
+  "type": "module",
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
@@ -13,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@easytax/validator": "^0.1.0",
+    "@easytax/validator": "workspace:*",
     "@types/body-parser": "^1.19.2",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
