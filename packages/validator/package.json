@@ -3,13 +3,15 @@
   "version": "0.1.0",
   "description": "",
   "main": "dist/index.js",
+  "browser": "dist.browser/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "dist.browser"
   ],
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc --build",
+    "build": "tsc && tsc -p tsconfig.browser.json",
     "clean": "tsc --build --clean"
   },
   "keywords": [],

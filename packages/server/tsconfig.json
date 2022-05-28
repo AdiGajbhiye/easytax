@@ -2,7 +2,7 @@
   "exclude": ["**/*.spec.ts"],
   "include": ["./src"],
   "compilerOptions": {
-    "target": "es2016",
+    "target": "ES6",
     "module": "commonjs",
     "rootDir": "./src",
     "moduleResolution": "node",
