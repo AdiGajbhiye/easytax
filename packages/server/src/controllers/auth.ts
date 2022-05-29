@@ -1,17 +1,17 @@
+import { Request, Response } from "express";
+import User from "@models/users";
+import { comparePassword, generateHash } from "@utils/auth";
 import {
   ILogin,
   ISignup,
   LoginValidation,
   SignupValidation,
 } from "@easytax/validator";
-import { Request, Response } from "express";
-import User from "@models/users";
-import { comparePassword, generateHash } from "@utils/auth";
 
 const login = async (req: Request<{}, {}, ILogin>, res: Response) => {
   const _result = LoginValidation.safeParse(req.body);
   if (!_result.success) {
-    console.log(_result.error);
+    res.status(400).json({ message: _result.error });
     return;
   }
   const { data } = _result;
@@ -36,7 +36,7 @@ const login = async (req: Request<{}, {}, ILogin>, res: Response) => {
 const signup = async (req: Request<{}, {}, ISignup>, res: Response) => {
   const _result = SignupValidation.safeParse(req.body);
   if (!_result.success) {
-    console.log(_result.error);
+    res.status(400).json({ message: _result.error });
     return;
   }
   const { data } = _result;

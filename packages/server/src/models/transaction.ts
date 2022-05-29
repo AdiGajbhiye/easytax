@@ -24,7 +24,7 @@ const FeeSchema: Schema = new Schema({
 
 const TransactionSchema: Schema = new Schema(
   {
-    userId: { type: String, required: true },
+    userId: { type: Schema.Types.ObjectId, required: true },
     symbol: { type: String, required: true },
     timestamp: { type: Number, required: true },
     tradeId: { type: String, required: true },
