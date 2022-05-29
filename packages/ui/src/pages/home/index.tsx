@@ -18,12 +18,7 @@ function Login() {
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="flex flex-col items-center">
-        <div className="text-2xl">Login</div>
-        <form onSubmit={handleSubmit((data) => mutation.mutate(data))} className="flex flex-col items-center">
-          <TextField name="email" label="Email" formProps={register('email')} error={errors?.email} />
-          <TextField name="password" label="Password" formProps={register('password')} error={errors?.password} />
-          <input type="submit" className="bg-blue-400 rounded py-2 mt-8 w-full" />
-        </form>
+        <div className="text-2xl">Home</div>
       </div>
     </div>
   );

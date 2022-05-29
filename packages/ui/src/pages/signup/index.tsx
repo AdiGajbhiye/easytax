@@ -5,6 +5,7 @@ import { ISignup, SignupValidation } from '@easytax/validator';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from 'react-query';
 import { postRequest } from '@service/http';
+import { Link } from 'react-router-dom';
 
 function Signup() {
   const mutation = useMutation<any, any, ISignup>(postRequest('auth/signup'));
@@ -32,6 +33,7 @@ function Signup() {
           />
           <input type="submit" className="bg-blue-400 rounded py-2 mt-8 w-full" />
         </form>
+        <Link to="/login">Already registered. Login</Link>
       </div>
     </div>
   );
