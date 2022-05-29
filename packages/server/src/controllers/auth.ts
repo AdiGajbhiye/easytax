@@ -17,23 +17,19 @@ const login = async (req: Request<{}, {}, ILogin>, res: Response) => {
   const { data } = _result;
   const user = await User.findOne({ email: data.email });
   if (!user) {
-    res
-      .send(404)
-      .json({ body: { message: "Email is not registered with us." } });
+    res.status(404).json({ message: "Email is not registered with us." });
     return;
   }
   const equal = await comparePassword(user.password, data.password);
   if (!equal) {
-    res.send(404).json({ body: { message: "Password dosn't match." } });
+    res.status(404).json({ message: "Password dosn't match." });
     return;
   }
   res.status(200).json({
-    body: {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      verified: user.verified,
-    },
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    verified: user.verified,
   });
 };
 
@@ -46,7 +42,7 @@ const signup = async (req: Request<{}, {}, ISignup>, res: Response) => {
   const { data } = _result;
   const _user = await User.findOne({ email: data.email });
   if (_user) {
-    res.send(409).json({ body: { message: "Email is already registered." } });
+    res.status(409).json({ message: "Email is already registered." });
     return;
   }
   const hash = await generateHash(data.password);
@@ -58,12 +54,10 @@ const signup = async (req: Request<{}, {}, ISignup>, res: Response) => {
     verified: false,
   });
   res.status(201).json({
-    body: {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      verified: user.verified,
-    },
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: user.email,
+    verified: user.verified,
   });
 };
 
