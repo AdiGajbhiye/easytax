@@ -19,7 +19,11 @@ const listTransactions = async (
     let since = 0;
     let lastTrade: Trade | undefined = undefined;
     while (true) {
-      const result: Trade[] = await exchange.fetchMyTrades('LUNAUSDT', since, 10);
+      const result: Trade[] = await exchange.fetchMyTrades(
+        "LUNAUSDT",
+        since,
+        10
+      );
       if (result.length === 0) break;
 
       if (!lastTrade) {
@@ -39,4 +43,12 @@ const listTransactions = async (
   }
 };
 
-export { listTransactions };
+const getBalance = async (exhange: ExchangeId, config: Config) => {
+  const exchange = new ccxt[exhange](config);
+  console.log(exchange.balance);
+  
+  const balance = await exchange.fetchTotalBalance();
+  return balance;
+};
+
+export { listTransactions, getBalance };
