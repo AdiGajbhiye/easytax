@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@easytax/validator": "workspace:*",
+    "@headlessui/react": "^1.6.4",
+    "@heroicons/react": "^1.0.6",
     "@hookform/resolvers": "^2.8.8",
     "classnames": "^2.3.1",
     "react": "^17.0.2",

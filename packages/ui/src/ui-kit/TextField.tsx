@@ -2,16 +2,15 @@ import classNames from 'classnames';
 import { FieldError, UseFormRegisterReturn } from 'react-hook-form';
 
 interface IProps {
-  name: string;
   label: string;
   formProps: UseFormRegisterReturn;
   error: FieldError | undefined;
 }
 
-function TextField({ name, label, formProps, error }: IProps) {
+function TextField({ label, formProps, error }: IProps) {
   return (
     <div className="flex flex-col m-2 w-full">
-      <label htmlFor={name} className="text-gray-700 relative">
+      <label className="text-gray-700 relative">
         {label}
         {error && <span className="text-red-500 required-dot">*</span>}
         <input

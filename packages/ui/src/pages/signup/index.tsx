@@ -21,16 +21,11 @@ function Signup() {
       <div className="flex flex-col items-center">
         <div className="text-2xl">Signup</div>
         <form onSubmit={handleSubmit((data) => mutation.mutate(data))} className="flex flex-col items-center">
-          <TextField name="firstName" label="First name" formProps={register('firstName')} error={errors?.firstName} />
-          <TextField name="lastName" label="Last name" formProps={register('lastName')} error={errors?.lastName} />
-          <TextField name="email" label="Email" formProps={register('email')} error={errors?.email} />
-          <TextField name="password" label="Password" formProps={register('password')} error={errors?.password} />
-          <TextField
-            name="confirmPassword"
-            label="Confirm Password"
-            formProps={register('confirmPassword')}
-            error={errors?.confirmPassword}
-          />
+          <TextField label="First name" formProps={register('firstName')} error={errors?.firstName} />
+          <TextField label="Last name" formProps={register('lastName')} error={errors?.lastName} />
+          <TextField label="Email" formProps={register('email')} error={errors?.email} />
+          <TextField label="Password" formProps={register('password')} error={errors?.password} />
+          <TextField label="Confirm Password" formProps={register('confirmPassword')} error={errors?.confirmPassword} />
           <input type="submit" className="bg-blue-400 rounded py-2 mt-8 w-full" />
         </form>
         <Link to="/login">Already registered. Login</Link>
