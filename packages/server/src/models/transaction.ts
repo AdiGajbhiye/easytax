@@ -1,11 +1,11 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-interface Fee {
+type IFee = {
   cost: Number;
   currency: String;
-}
+};
 
-interface ITransaction {
+type ITransaction = {
   userId: String;
   symbol: String;
   timestamp: Number;
@@ -14,15 +14,15 @@ interface ITransaction {
   price: Number;
   amount: Number;
   cost: Number;
-  fee: Fee;
-}
+  fee: IFee;
+};
 
-const FeeSchema: Schema = new Schema({
+const FeeSchema = new Schema<IFee>({
   cost: { type: Number, required: true },
   currency: { type: String, required: true },
 });
 
-const TransactionSchema: Schema = new Schema(
+const TransactionSchema: Schema = new Schema<ITransaction>(
   {
     userId: { type: Schema.Types.ObjectId, required: true },
     symbol: { type: String, required: true },

@@ -1,14 +1,11 @@
-import mongoose, { Document, Schema } from "mongoose";
+import { ISignup } from "@easytax/validator";
+import mongoose, { Schema } from "mongoose";
 
-interface IUser {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
+type UserModel = Omit<ISignup, "confirmPassword"> & {
   verified: boolean;
-}
+};
 
-const UserSchema: Schema = new Schema(
+const UserSchema: Schema = new Schema<UserModel>(
   {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -19,4 +16,4 @@ const UserSchema: Schema = new Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<IUser>("User", UserSchema);
+export default mongoose.model<UserModel>("User", UserSchema);

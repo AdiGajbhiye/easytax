@@ -1,15 +1,11 @@
-import mongoose, { Document, Schema } from "mongoose";
+import { IWallet } from "@easytax/validator";
+import mongoose, { Schema } from "mongoose";
 
-interface IWallet {
-  // userId: string;
-  walletType: string;
-  publicAddress: string;
-  secret?: string;
-}
+type WalletModel = IWallet & { userId: string };
 
-const WalletSchema = new Schema<IWallet>(
+const WalletSchema: Schema = new Schema<WalletModel>(
   {
-    // userId: { type: Schema.Types.ObjectId, required: true },
+    userId: { type: Schema.Types.ObjectId, required: true },
     walletType: { type: String, required: true },
     publicAddress: { type: String, required: true },
     secret: { type: String },
@@ -17,4 +13,4 @@ const WalletSchema = new Schema<IWallet>(
   { timestamps: true }
 );
 
-export default mongoose.model<IWallet>("Wallet", WalletSchema);
+export default mongoose.model<WalletModel>("Wallet", WalletSchema);
