@@ -12,6 +12,7 @@ function AddWallet() {
 
   const {
     control,
+    watch,
     register,
     handleSubmit,
     formState: { errors },
@@ -39,6 +40,9 @@ function AddWallet() {
         />
 
         <TextField label="Public address" formProps={register('publicAddress')} error={errors?.publicAddress} />
+        {watch('walletType') === 'wallet' && (
+          <TextField label="Secret" formProps={register('secret')} error={errors?.secret} />
+        )}
         <input type="submit" className="bg-blue-400 rounded py-2 mt-8 w-full" />
       </form>
     </div>
