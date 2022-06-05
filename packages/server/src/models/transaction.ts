@@ -5,7 +5,7 @@ interface Fee {
   currency: String;
 }
 
-interface ITransaction extends Document {
+interface ITransaction {
   userId: String;
   symbol: String;
   timestamp: Number;

@@ -2,20 +2,26 @@ import React from 'react';
 import Dropdown from '@ui-kit/Dropdown';
 import { Controller, useForm } from 'react-hook-form';
 import TextField from '@ui-kit/TextField';
+import { IWallet, WalletValidation } from '@easytax/validator';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { postRequest } from '@service/http';
+import { useMutation } from 'react-query';
 
 function AddWallet() {
+  const mutation = useMutation<any, any, IWallet>(postRequest('wallet/add'));
+
   const {
     control,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm<IWallet>({ resolver: zodResolver(WalletValidation) });
 
   return (
     <div className="flex flex-col justify-center">
-      <form onSubmit={handleSubmit((data) => console.log(data))} className="flex flex-col items-center">
+      <form onSubmit={handleSubmit((data) => mutation.mutate(data))} className="flex flex-col items-center">
         <Controller
-          name="wallet"
+          name="walletType"
           control={control}
           render={({ field: { onChange, value } }) => (
             <Dropdown
@@ -23,11 +29,10 @@ function AddWallet() {
               label="Wallet"
               placeholder="Select wallet"
               options={[
-                { text: 'Binance', value: 'binance' },
-                { text: 'Bitforex', value: 'bitforex' },
-                { text: 'FTX', value: 'ftx' },
+                { text: 'Exchange', value: 'exchange' },
+                { text: 'Wallet', value: 'wallet' },
               ]}
-              error={errors?.wallet}
+              error={errors?.walletType}
               value={value}
             />
           )}

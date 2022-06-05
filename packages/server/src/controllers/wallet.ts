@@ -11,12 +11,16 @@ const addWallet = async (req: Request<{}, {}, IWallet>, res: Response) => {
     return;
   }
   const { data } = _result;
-  const wallet = await Wallet.create(data);
-  res.status(201).json({
-    type: wallet.type,
-    name: wallet.name,
-    publicKey: wallet.publicKey,
-  });
+  
+  try {
+    const wallet = await Wallet.create({ ...data, userId: "userId" });
+    res.status(201).json({
+      walletType: wallet.walletType,
+      publicAddress: wallet.publicAddress,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const updateWallet = async (
@@ -27,3 +31,5 @@ const updateWallet = async (
 const deleteWallet = async (req: Request<{}, {}, {}>, res: Response) => {};
 
 const listWallet = async (req: Request<{}, {}, {}>, res: Response) => {};
+
+export { addWallet };

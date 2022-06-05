@@ -1,19 +1,17 @@
 import mongoose, { Document, Schema } from "mongoose";
 
-interface IWallet extends Document {
-  userId: string;
-  type: string;
-  name: string;
-  publicKey: string;
+interface IWallet {
+  // userId: string;
+  walletType: string;
+  publicAddress: string;
   secret?: string;
 }
 
-const WalletSchema: Schema = new Schema(
+const WalletSchema = new Schema<IWallet>(
   {
-    userId: { type: Schema.Types.ObjectId, required: true },
-    type: { type: String, required: true },
-    name: { type: String, required: true },
-    publicKey: { type: String, required: true },
+    // userId: { type: Schema.Types.ObjectId, required: true },
+    walletType: { type: String, required: true },
+    publicAddress: { type: String, required: true },
     secret: { type: String },
   },
   { timestamps: true }
