@@ -1,5 +1,5 @@
 {
-  "exclude": ["**/*.spec.ts"],
+  // "exclude": ["**/*.spec.ts"],
   "include": ["./src"],
   "compilerOptions": {
     "target": "ES6",
@@ -13,7 +13,8 @@
       "@models/*": ["models/*"],
       "@services/*": ["services/*"],
       "@utils/*": ["utils/*"],
-      "@routes/*": ["routes/*"]
+      "@routes/*": ["routes/*"],
+      "@middleware/*": ["middleware/*"]
     },
     "sourceMap": true,
     "outDir": "./dist",

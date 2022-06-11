@@ -7,6 +7,8 @@ import {
   LoginValidation,
   SignupValidation,
 } from "@easytax/validator";
+import jwt from "jsonwebtoken";
+import { JWT_SECRET } from "@config/config";
 
 const login = async (req: Request<{}, {}, ILogin>, res: Response) => {
   const _result = LoginValidation.safeParse(req.body);
@@ -25,12 +27,17 @@ const login = async (req: Request<{}, {}, ILogin>, res: Response) => {
     res.status(404).json({ message: "Password dosn't match." });
     return;
   }
-  res.status(200).json({
+
+  const payload = {
+    id: user.id,
     firstName: user.firstName,
     lastName: user.lastName,
     email: user.email,
     verified: user.verified,
-  });
+  };
+
+  const token = jwt.sign(payload, JWT_SECRET, { expiresIn: "1d" });
+  res.status(200).json({ token: "Bearer " + token });
 };
 
 const signup = async (req: Request<{}, {}, ISignup>, res: Response) => {

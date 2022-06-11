@@ -10,6 +10,7 @@
     "@models/(.*)": "<rootDir>/models/$1",
     "@services/(.*)": "<rootDir>/services/$1",
     "@utils/(.*)": "<rootDir>/utils/$1",
-    "@routes/(.*)": "<rootDir>/routes/$1"
+    "@routes/(.*)": "<rootDir>/routes/$1",
+    "@middleware/(.*)": "<rootDir>/middleware/$1"
   }
 }
