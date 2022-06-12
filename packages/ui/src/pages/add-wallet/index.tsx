@@ -8,7 +8,10 @@ import { postRequest } from '@service/http';
 import { useMutation } from 'react-query';
 
 function AddWallet() {
-  const mutation = useMutation<any, any, IWallet>(postRequest('wallet/add'));
+  const mutation = useMutation<any, any, IWallet>(async (data) => {
+    const response = postRequest('wallet/add', data);
+    console.log(response);
+  });
 
   const {
     control,

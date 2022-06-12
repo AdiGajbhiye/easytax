@@ -19,7 +19,8 @@
       "@components/*": ["./src/components/*"],
       "@pages/*": ["./src/pages/*"],
       "@ui-kit/*": ["./src/ui-kit/*"],
-      "@service/*": ["./src/service/*"]
+      "@service/*": ["./src/service/*"],
+      "@app": ["./src/App.tsx"]
     }
   },
   "include": ["src"],

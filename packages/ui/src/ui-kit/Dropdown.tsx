@@ -1,8 +1,7 @@
 import { Fragment } from 'react';
-import classnames from 'classnames';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-import { FieldError, RefCallBack } from 'react-hook-form';
+import { FieldError } from 'react-hook-form';
 
 interface Option {
   text: string;

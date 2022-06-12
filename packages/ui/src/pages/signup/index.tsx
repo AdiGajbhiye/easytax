@@ -1,5 +1,4 @@
-import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import TextField from '@ui-kit/TextField';
 import { ISignup, SignupValidation } from '@easytax/validator';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -8,7 +7,10 @@ import { postRequest } from '@service/http';
 import { Link } from 'react-router-dom';
 
 function Signup() {
-  const mutation = useMutation<any, any, ISignup>(postRequest('auth/signup'));
+  const mutation = useMutation<any, any, ISignup>(async (data) => {
+    const response = await postRequest('auth/signup', data);
+    console.log(response);
+  });
 
   const {
     register,
