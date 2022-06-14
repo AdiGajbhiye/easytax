@@ -2,13 +2,11 @@ import React, { Fragment } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronDownIcon, UserIcon, LogoutIcon, CogIcon } from '@heroicons/react/solid';
 import { Menu, Transition } from '@headlessui/react';
-import { useMachine } from '@xstate/react';
-import { authMachine } from '@service/auth';
+import { authService } from '@service/auth';
 
 const TextLink: React.FC = ({ children }) => <span className="px-2">{children}</span>;
 
 function NavBar() {
-  const [, send] = useMachine(authMachine);
   const navigate = useNavigate();
 
   return (
@@ -63,7 +61,7 @@ function NavBar() {
                 type="button"
                 className="p-2 text-left text-black flex items-center"
                 onClick={() => {
-                  send('LOGOUT');
+                  authService.send('LOGOUT');
                   navigate('/login');
                 }}
               >

@@ -5,18 +5,13 @@ import { ILogin, LoginValidation } from '@easytax/validator';
 import { useMutation } from 'react-query';
 import { postRequest } from '@service/http';
 import { Link, useNavigate } from 'react-router-dom';
-import { useMachine } from '@xstate/react';
-import { authMachine } from '@service/auth';
+import { authService } from '@service/auth';
 
 function Login() {
-  const [state, send] = useMachine(authMachine);
   const navigate = useNavigate();
   const mutation = useMutation<any, any, ILogin>(async (data) => {
     const { token } = await postRequest('auth/login', data);
-    console.log('1 -> ', token);
-    console.log('2 -> ', state.value);
-    send('LOGIN', { token });
-    console.log('3 -> ', state.value);
+    authService.send('LOGIN', { token });
     navigate('/dashboard');
   });
 

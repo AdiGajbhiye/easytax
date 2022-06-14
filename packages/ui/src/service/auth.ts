@@ -1,4 +1,4 @@
-import { createMachine } from 'xstate';
+import { createMachine, interpret } from 'xstate';
 import Cookies from 'js-cookie';
 
 export const isUserLoggedIn = () => {
@@ -8,7 +8,7 @@ export const isUserLoggedIn = () => {
 
 export const getAccessToken = () => Cookies.get('accessToken') || '';
 
-export const authMachine = createMachine<void, { type: 'LOGIN'; token: string } | { type: 'LOGOUT' }>({
+const authMachine = createMachine<void, { type: 'LOGIN'; token: string } | { type: 'LOGOUT' }>({
   initial: isUserLoggedIn() ? 'loggedIn' : 'loggedOut',
   states: {
     loggedIn: {
@@ -26,8 +26,6 @@ export const authMachine = createMachine<void, { type: 'LOGIN'; token: string } 
         LOGIN: {
           target: 'loggedIn',
           actions: (_, { token }) => {
-            console.log('action ', token);
-
             Cookies.set('accessToken', token);
           },
         },
@@ -35,3 +33,5 @@ export const authMachine = createMachine<void, { type: 'LOGIN'; token: string } 
     },
   },
 });
+
+export const authService = interpret(authMachine).start();
