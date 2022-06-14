@@ -1,5 +1,6 @@
 import './App.css';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
+import history from 'history/browser';
 import Login from '@pages/login';
 import Signup from '@pages/signup';
 import Home from '@pages/home';
@@ -11,7 +12,7 @@ import Transaction from '@pages/transaction';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HistoryRouter history={history}>
       <Routes>
         <Route path="/" element={<Home />}>
           <Route path="" element={<Dashboard />} />
@@ -25,7 +26,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 
