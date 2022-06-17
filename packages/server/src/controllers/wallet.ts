@@ -11,9 +11,9 @@ const addWallet = async (req: Request<{}, {}, IWallet>, res: Response) => {
     return;
   }
   const { data } = _result;
-  
+
   try {
-    const wallet = await Wallet.create({ ...data, userId: "userId" });
+    const wallet = await Wallet.create({ ...data, userId: res.locals.jwt.id });
     res.status(201).json({
       walletType: wallet.walletType,
       publicAddress: wallet.publicAddress,
@@ -30,6 +30,15 @@ const updateWallet = async (
 
 const deleteWallet = async (req: Request<{}, {}, {}>, res: Response) => {};
 
-const listWallet = async (req: Request<{}, {}, {}>, res: Response) => {};
+const listWallet = async (req: Request<{}, {}, {}>, res: Response) => {
+  try {
+    const wallets = await Wallet.find({ userId: res.locals.jwt.id });
+    res.status(201).json({
+      wallets,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-export { addWallet };
+export { addWallet, listWallet };

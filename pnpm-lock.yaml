@@ -70,6 +70,7 @@ importers:
       '@xstate/react': ^3.0.0
       autoprefixer: ^10.4.7
       classnames: ^2.3.1
+      dayjs: ^1.11.3
       eslint: ^8.12.0
       eslint-config-airbnb: ^19.0.4
       eslint-config-airbnb-typescript: ^17.0.0
@@ -101,6 +102,7 @@ importers:
       '@hookform/resolvers': 2.9.1_react-hook-form@7.32.0
       '@xstate/react': 3.0.0_o6umqso4scogh3yesj77at2stm
       classnames: 2.3.1
+      dayjs: 1.11.3
       history: 5.3.0
       js-cookie: 3.0.1
       react: 17.0.2
@@ -2051,6 +2053,10 @@ packages:
       whatwg-mimetype: 2.3.0
       whatwg-url: 8.7.0
     dev: true
+
+  /dayjs/1.11.3:
+    resolution: {integrity: sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
