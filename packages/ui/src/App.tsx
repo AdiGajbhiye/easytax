@@ -1,14 +1,15 @@
 import './App.css';
 import { Navigate, Route, Routes, unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import history from 'history/browser';
-import Login from '@pages/login';
-import Signup from '@pages/signup';
-import Home from '@pages/home';
-import Dashboard from '@pages/dashboard';
-import Portfolio from '@pages/portfolio';
-import AddWallet from '@pages/add-wallet';
-import Wallet from '@pages/wallet';
-import Transaction from '@pages/transaction';
+import AddWallet from '@pages/AddWallet';
+import Dashboard from '@pages/Dashboard';
+import Home from '@pages/Home';
+import Login from '@pages/Login';
+import Portfolio from '@pages/Portfolio';
+import Settings from '@pages/Settings';
+import Signup from '@pages/Signup';
+import Transaction from '@pages/Transaction';
+import Wallet from '@pages/Wallet';
 import { authService } from '@service/auth';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="portfolio" element={<Portfolio />} />
           <Route path="add_wallet" element={<AddWallet />} />
           <Route path="wallet" element={<Wallet />} />
+          <Route path="settings" element={<Settings />} />
           <Route path="transaction" element={<Transaction />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>

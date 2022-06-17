@@ -51,10 +51,12 @@ function NavBar() {
         >
           <Menu.Items className="absolute right-2 w-fit origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <Menu.Item as="button">
-              <div className="p-2 text-left text-black flex items-center">
-                <CogIcon className="h-5 w-5 text-black" />
-                <div className="mx-2">Settings</div>
-              </div>
+              <Link to="/settings">
+                <div className="p-2 text-left text-black flex items-center">
+                  <CogIcon className="h-5 w-5 text-black" />
+                  <div className="mx-2">Settings</div>
+                </div>
+              </Link>
             </Menu.Item>
             <Menu.Item>
               <button
