@@ -9,6 +9,7 @@ import Portfolio from '@pages/portfolio';
 import AddWallet from '@pages/add-wallet';
 import Wallet from '@pages/wallet';
 import Transaction from '@pages/transaction';
+import { authService } from '@service/auth';
 
 function App() {
   return (
@@ -23,7 +24,10 @@ function App() {
           <Route path="transaction" element={<Transaction />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/login"
+          element={authService.state.value === 'loggedOut' ? <Login /> : <Navigate to="/" replace />}
+        />
         <Route path="/signup" element={<Signup />} />
       </Routes>
     </HistoryRouter>
