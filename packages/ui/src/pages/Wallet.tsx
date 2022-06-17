@@ -17,7 +17,7 @@ function Wallet() {
     dayjs(createdAt).fromNow(),
   ]);
   return (
-    <div>
+    <div className="m-4">
       <Table header={header} data={tableData} />
     </div>
   );

@@ -28,7 +28,7 @@ function Login() {
         <form onSubmit={handleSubmit((data) => mutation.mutate(data))} className="flex flex-col items-center">
           <TextField label="Email" formProps={register('email')} error={errors?.email} />
           <TextField label="Password" type="password" formProps={register('password')} error={errors?.password} />
-          <input type="submit" className="bg-blue-400 rounded py-2 mt-8 w-full" />
+          <input type="submit" className="bg-blue-400 text-white rounded py-2 mt-8 w-full" />
         </form>
         <Link to="/signup">Not registered. Signup</Link>
       </div>

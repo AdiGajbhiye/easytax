@@ -22,7 +22,7 @@ function AddWallet() {
   } = useForm<IWallet>({ resolver: zodResolver(WalletValidation) });
 
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center m-4">
       <form onSubmit={handleSubmit((data) => mutation.mutate(data))} className="flex flex-col items-center">
         <Controller
           name="walletType"
@@ -46,7 +46,7 @@ function AddWallet() {
         {watch('walletType') === 'wallet' && (
           <TextField label="Secret" formProps={register('secret')} error={errors?.secret} />
         )}
-        <input type="submit" className="bg-blue-400 rounded py-2 mt-8 w-full" />
+        <input type="submit" className="bg-blue-400 text-white rounded py-2 mt-8 w-full" />
       </form>
     </div>
   );
