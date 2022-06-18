@@ -7,13 +7,13 @@ import { useQuery } from 'react-query';
 dayjs.extend(relativeTime);
 
 function Wallet() {
-  const { isLoading, isError, data, error } = useQuery('listWallets', () => getRequest('wallet/list'));
+  const { isLoading, isError, data, error } = useQuery('listWallets', () => getRequest('wallet/get'));
   if (isLoading) return <div>Loading</div>;
   if (isError) return <div>{String(error)}</div>;
-  const header = ['Wallet type', 'Public address', 'Created at'];
-  const tableData = data.wallets.map(({ walletType, publicAddress, createdAt }) => [
+  const header = ['Wallet type', 'Wallet total', 'Created at'];
+  const tableData = data.wallets.map(({ walletType, walletTotal, createdAt }) => [
     walletType,
-    publicAddress,
+    walletTotal,
     dayjs(createdAt).fromNow(),
   ]);
   return (

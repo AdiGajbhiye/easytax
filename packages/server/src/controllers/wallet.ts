@@ -1,8 +1,9 @@
 import { IWallet, WalletValidation } from "@easytax/validator";
 import Wallet from "@models/wallet";
 import { Request, Response } from "express";
-
-const getWallet = async (req: Request<{}, {}, {}>, res: Response) => {};
+import { getBalance } from "@services/exchange";
+import { ExchangeId } from "ccxt";
+import { getPricesInFiat } from "@services/coinMarketCap";
 
 const addWallet = async (req: Request<{}, {}, IWallet>, res: Response) => {
   const _result = WalletValidation.safeParse(req.body);
@@ -30,15 +31,49 @@ const updateWallet = async (
 
 const deleteWallet = async (req: Request<{}, {}, {}>, res: Response) => {};
 
-const listWallet = async (req: Request<{}, {}, {}>, res: Response) => {
+const getWallet = async (req: Request<{}, {}, {}>, res: Response) => {
   try {
     const wallets = await Wallet.find({ userId: res.locals.jwt.id });
-    res.status(201).json({
-      wallets,
+    const balances = await Promise.all(
+      wallets
+        .filter((w) => !!w.secret && w.walletType === "binance")
+        .map((w) =>
+          getBalance(w.walletType as ExchangeId, {
+            apiKey: w.publicAddress,
+            // @ts-ignore
+            secret: w.secret,
+          })
+        )
+    );
+    if (balances.length === 0) {
+      return res.status(200).json({ wallets: [] });
+    }
+    const prices = await getPricesInFiat(
+      Array.from(new Set<string>(balances.flatMap((b) => Object.keys(b))))
+    );
+    const data = wallets.map((w, i) => {
+      let walletTotal = 0;
+      const b = balances[i];
+      const _balance = [];
+      for (const [k, v] of Object.entries(b)) {
+        const price = v * prices[k];
+        walletTotal += price;
+        _balance.push({ symbol: k, value: v, price });
+      }
+      return {
+        id: w.id,
+        walletType: w.walletType,
+        // @ts-ignore
+        createdAt: w.createdAt,
+        walletTotal,
+        balance: _balance,
+      };
     });
+
+    res.status(200).json({ wallets: data });
   } catch (error) {
     console.log(error);
   }
 };
 
-export { addWallet, listWallet };
+export { addWallet, getWallet };

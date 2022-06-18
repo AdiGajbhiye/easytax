@@ -33,7 +33,7 @@ function AddWallet() {
               label="Wallet"
               placeholder="Select wallet"
               options={[
-                { text: 'Exchange', value: 'exchange' },
+                { text: 'Binance', value: 'binance' },
                 { text: 'Wallet', value: 'wallet' },
               ]}
               error={errors?.walletType}
@@ -43,7 +43,7 @@ function AddWallet() {
         />
 
         <TextField label="Public address" formProps={register('publicAddress')} error={errors?.publicAddress} />
-        {watch('walletType') === 'wallet' && (
+        {watch('walletType') === 'binance' && (
           <TextField label="Secret" formProps={register('secret')} error={errors?.secret} />
         )}
         <input type="submit" className="bg-blue-400 text-white rounded py-2 mt-8 w-full" />

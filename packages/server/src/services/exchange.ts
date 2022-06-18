@@ -1,4 +1,4 @@
-import ccxt, { ExchangeId, Trade, Params } from "ccxt";
+import ccxt, { ExchangeId, Trade } from "ccxt";
 
 interface Config {
   apiKey: string;
