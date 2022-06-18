@@ -6,11 +6,11 @@ interface Config {
 }
 
 const listTransactions = async (
-  exhange: ExchangeId,
+  exhangeId: ExchangeId,
   config: Config,
   consumer: (o: Trade[]) => void
 ) => {
-  const exchange = new ccxt[exhange](config);
+  const exchange = new ccxt[exhangeId](config);
   const markets = await exchange.loadMarkets();
   const symbols = Object.keys(markets);
   let j = 0;
@@ -43,11 +43,11 @@ const listTransactions = async (
   }
 };
 
-const getBalance = async (exhange: ExchangeId, config: Config) => {
-  const exchange = new ccxt[exhange](config);
-  console.log(exchange.balance);
-  
-  const balance = await exchange.fetchTotalBalance();
+const getBalance = async (exhangeId: ExchangeId, config: Config) => {
+  const exchange = new ccxt[exhangeId](config);
+  const { total } = await exchange.fetchBalance();
+  const balance: { [k: string]: number } = {};
+  for (const [k, v] of Object.entries(total)) if (v > 0) balance[k] = v;
   return balance;
 };
 

@@ -8,9 +8,9 @@ test("listTransactions", async () => {
     "binance",
     {
       apiKey:
-        "BZsn6iTHBcFdvQ6f5qaVCvmDUsMsgJKKXMPXF26TLcjfHY1O7DH9q7pGY2ACEDUx",
+        "W71NdUIxcfuPxk4Sb1Az68htbEHn6HrZlBcnUtGoTWI5pdvOY89NcpdyXDSE56Cz",
       secret:
-        "JG40vX4poc5rybQqMciGHIxiyFSQRGhmIVVptdu21AUcPiapnRS6GD7wiR3JSB9E",
+        "iB2gz160Opek5lLDWiPrSVKhKnJPkdGGzP46nupLUiFf759opZGUCWY5F7dXJF0S",
     },
     (r) => {
       result.push(...r);
@@ -21,8 +21,8 @@ test("listTransactions", async () => {
 
 test("getBalance", async () => {
   const balance = await getBalance("binance", {
-    apiKey: "BZsn6iTHBcFdvQ6f5qaVCvmDUsMsgJKKXMPXF26TLcjfHY1O7DH9q7pGY2ACEDUx",
-    secret: "JG40vX4poc5rybQqMciGHIxiyFSQRGhmIVVptdu21AUcPiapnRS6GD7wiR3JSB9E",
+    apiKey: "W71NdUIxcfuPxk4Sb1Az68htbEHn6HrZlBcnUtGoTWI5pdvOY89NcpdyXDSE56Cz",
+    secret: "iB2gz160Opek5lLDWiPrSVKhKnJPkdGGzP46nupLUiFf759opZGUCWY5F7dXJF0S",
   });
   console.log(balance);
 });
