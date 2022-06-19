@@ -3,12 +3,18 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import { getRequest } from '@service/http';
 import Table from '@ui-kit/table';
 import { useQuery } from 'react-query';
+import Loader from '@components/Loader';
 
 dayjs.extend(relativeTime);
 
 function Wallet() {
   const { isLoading, isError, data, error } = useQuery('listWallets', () => getRequest('wallet/get'));
-  if (isLoading) return <div>Loading</div>;
+  if (isLoading)
+    return (
+      <div className="h-full">
+        <Loader />
+      </div>
+    );
   if (isError) return <div>{String(error)}</div>;
   const header = ['Wallet type', 'Wallet total', 'Created at'];
   const tableData = data.wallets.map(({ walletType, walletTotal, createdAt }) => [
