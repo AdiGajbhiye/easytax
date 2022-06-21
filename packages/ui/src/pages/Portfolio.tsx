@@ -5,7 +5,7 @@ function Portfolio() {
   return (
     <div>
       Portfolio
-      <PieChart />
+      <PieChart values={{ values: [] }} />
     </div>
   );
 }
