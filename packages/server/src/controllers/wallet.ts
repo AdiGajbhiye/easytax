@@ -21,6 +21,7 @@ const addWallet = async (req: Request<{}, {}, IWallet>, res: Response) => {
     });
   } catch (error) {
     console.log(error);
+    res.sendStatus(500);
   }
 };
 
@@ -73,6 +74,7 @@ const getWallet = async (req: Request<{}, {}, {}>, res: Response) => {
     res.status(200).json({ wallets: data });
   } catch (error) {
     console.log(error);
+    res.sendStatus(500);
   }
 };
 

@@ -44,7 +44,14 @@ const listTransactions = async (
 };
 
 const getBalance = async (exhangeId: ExchangeId, config: Config) => {
-  const exchange = new ccxt[exhangeId](config);
+  const exchange = new ccxt[exhangeId]({
+    ...config,
+    rateLimit: 10000,
+    options: {
+      adjustForTimeDifference: true, // exchange-specific option
+      enableRateLimit: true
+    },
+  });
   const { total } = await exchange.fetchBalance();
   const balance: { [k: string]: number } = {};
   for (const [k, v] of Object.entries(total)) if (v > 0) balance[k] = v;

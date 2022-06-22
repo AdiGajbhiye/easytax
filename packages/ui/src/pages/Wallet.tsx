@@ -8,7 +8,7 @@ import Loader from '@components/Loader';
 dayjs.extend(relativeTime);
 
 function Wallet() {
-  const { isLoading, isError, data, error } = useQuery('listWallets', () => getRequest('wallet/get'));
+  const { isLoading, isError, data, error } = useQuery('getWallet', () => getRequest('wallet/get'));
   if (isLoading)
     return (
       <div className="h-full">
