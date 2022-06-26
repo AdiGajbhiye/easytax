@@ -5,25 +5,25 @@ interface Config {
   secret: string;
 }
 
-const listTransactions = async (
+const getSymbols = async (exhangeId: ExchangeId, config: Config) => {
+  const exchange = new ccxt[exhangeId](config);
+  const markets = await exchange.loadMarkets();
+  return Object.keys(markets);
+};
+
+const consumeTransactions = async (
   exhangeId: ExchangeId,
   config: Config,
+  symbols: string[],
+  since: number,
   consumer: (o: Trade[]) => void
 ) => {
   const exchange = new ccxt[exhangeId](config);
-  const markets = await exchange.loadMarkets();
-  const symbols = Object.keys(markets);
-  let j = 0;
   for (let i = 0; i < symbols.length; i++) {
     const symbol = symbols[i];
-    let since = 0;
     let lastTrade: Trade | undefined = undefined;
     while (true) {
-      const result: Trade[] = await exchange.fetchMyTrades(
-        "LUNAUSDT",
-        since,
-        10
-      );
+      const result: Trade[] = await exchange.fetchMyTrades(symbol, since, 10);
       if (result.length === 0) break;
 
       if (!lastTrade) {
@@ -36,26 +36,15 @@ const listTransactions = async (
       lastTrade = result[result.length - 1];
       since = lastTrade.timestamp;
     }
-    j++;
-    if (j > 1) {
-      break;
-    }
   }
 };
 
 const getBalance = async (exhangeId: ExchangeId, config: Config) => {
-  const exchange = new ccxt[exhangeId]({
-    ...config,
-    rateLimit: 10000,
-    options: {
-      adjustForTimeDifference: true, // exchange-specific option
-      enableRateLimit: true
-    },
-  });
+  const exchange = new ccxt[exhangeId](config);
   const { total } = await exchange.fetchBalance();
   const balance: { [k: string]: number } = {};
   for (const [k, v] of Object.entries(total)) if (v > 0) balance[k] = v;
   return balance;
 };
 
-export { listTransactions, getBalance };
+export { consumeTransactions, getBalance, getSymbols };
