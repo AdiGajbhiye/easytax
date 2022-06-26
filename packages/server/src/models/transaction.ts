@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, Types } from "mongoose";
 
 type IFee = {
   cost: Number;
@@ -6,7 +6,7 @@ type IFee = {
 };
 
 type ITransaction = {
-  userId: String;
+  userId: Types.ObjectId;
   symbol: String;
   timestamp: Number;
   tradeId: String;
@@ -24,7 +24,7 @@ const FeeSchema = new Schema<IFee>({
 
 const TransactionSchema: Schema = new Schema<ITransaction>(
   {
-    userId: { type: Schema.Types.ObjectId, required: true },
+    userId: { type: Schema.Types.ObjectId, required: true, ref: "User" },
     symbol: { type: String, required: true },
     timestamp: { type: Number, required: true },
     tradeId: { type: String, required: true },

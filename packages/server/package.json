@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
-    "dev": "ts-node-dev -r tsconfig-paths/register src/index.ts",
+    "dev": "ts-node-dev --no-experimental-fetch -r tsconfig-paths/register src/index.ts",
     "build": "tsc -p .",
     "test": "jest -c ./jest.unit.json"
   },
