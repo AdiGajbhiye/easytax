@@ -1,12 +1,13 @@
-import mongoose, { Document, Schema, Types } from "mongoose";
+import mongoose, { Schema, Types } from "mongoose";
 
-type IFee = {
+type Fee = {
   cost: Number;
   currency: String;
 };
 
-type ITransaction = {
+type Transaction = {
   userId: Types.ObjectId;
+  walletId: Types.ObjectId;
   symbol: String;
   timestamp: Number;
   tradeId: String;
@@ -14,17 +15,18 @@ type ITransaction = {
   price: Number;
   amount: Number;
   cost: Number;
-  fee: IFee;
+  fee: Fee;
 };
 
-const FeeSchema = new Schema<IFee>({
+const FeeSchema = new Schema<Fee>({
   cost: { type: Number, required: true },
   currency: { type: String, required: true },
 });
 
-const TransactionSchema: Schema = new Schema<ITransaction>(
+const TransactionSchema: Schema = new Schema<Transaction>(
   {
     userId: { type: Schema.Types.ObjectId, required: true, ref: "User" },
+    walletId: { type: Schema.Types.ObjectId, required: true, ref: "Wallet" },
     symbol: { type: String, required: true },
     timestamp: { type: Number, required: true },
     tradeId: { type: String, required: true },
@@ -37,4 +39,4 @@ const TransactionSchema: Schema = new Schema<ITransaction>(
   { timestamps: true }
 );
 
-export default mongoose.model<ITransaction>("Transaction", TransactionSchema);
+export default mongoose.model<Transaction>("Transaction", TransactionSchema);

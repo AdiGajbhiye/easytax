@@ -12,7 +12,7 @@ app.use(urlencoded({ extended: true }));
 app.use(json());
 
 app.use("/api/auth", authRoutes);
-app.use("/api/transactions", transactionRoutes);
+app.use("/api/transaction", transactionRoutes);
 app.use("/api/wallet", walletRoutes);
 
 export default app;

@@ -5,7 +5,7 @@ import { getRequest } from '@service/http';
 import Loader from '@components/Loader';
 
 function Portfolio() {
-  const { isLoading, isError, data, error } = useQuery('getWallet', () => getRequest('wallet/get'));
+  const { isLoading, isError, data, error } = useQuery('getWallet', () => getRequest('wallet'));
   if (isLoading)
     return (
       <div className="h-full">

@@ -1,11 +1,12 @@
 import express from "express";
-import { addWallet, getWallet } from "@controllers/wallet";
+import { addWallet, deleteWallet, getWallet } from "@controllers/wallet";
 import { authenticate } from "@middleware/auth";
 
 const router = express.Router();
 router.use(authenticate);
 
-router.post("/add", addWallet);
-router.get("/get", getWallet);
+router.get("/", getWallet);
+router.post("/", addWallet);
+router.delete("/:id", deleteWallet);
 
 export default router;

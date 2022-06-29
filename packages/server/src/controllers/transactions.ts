@@ -1,29 +1,33 @@
 import Transaction from "@models/transaction";
-import { listTransactions } from "@services/exchange";
+import { CronJob } from "cron";
 import { Request, Response } from "express";
+import dayjs from "dayjs";
+import { syncAllTransactions } from "@jobs/syncTransactions";
 
-const uploadTransactions = async (req: Request, res: Response) => {
-  let total = 0;
-  await listTransactions(
-    "binance",
-    {
-      apiKey:
-        "f9aCczHftjEdJ7NgmuUiIUPhLgE3VaZyLKx4WOUXeLXNnNSusS2BY53K4n2d081c",
-      secret:
-        "LixPanbCCFPWdnnuh6G5whm4r7U4rHMLy4OhVcLt22NRBl4NS618bXxokgxMiRI4",
+const syncTransactions = async (req: Request, res: Response) => {
+  const cronExpression = dayjs().add(5, "s").toDate();
+  new CronJob(
+    cronExpression,
+    () => {
+      console.log("this is job on tick");
+      syncAllTransactions();
     },
-    async (trades) => {
-      try {
-        await Transaction.create(
-          ...trades.map((t) => ({ ...t, tradeId: t.id, userId: "temp" }))
-        );
-        total += trades.length;
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    () => {
+      console.log("this is job on complete");
+    },
+    true
   );
-  res.status(200).json({ body: { total } });
+  res.sendStatus(200);
 };
 
-export { uploadTransactions };
+const getTransactions = async (req: Request, res: Response) => {
+  try {
+    const transactions = await Transaction.find({ userId: res.locals.jwt.id });
+    res.status(200).json({ body: transactions });
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(404);
+  }
+};
+
+export { syncTransactions, getTransactions };

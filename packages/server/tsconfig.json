@@ -1,5 +1,4 @@
 {
-  // "exclude": ["**/*.spec.ts"],
   "include": ["./src"],
   "compilerOptions": {
     "target": "ES6",
@@ -14,6 +13,7 @@
       "@services/*": ["services/*"],
       "@utils/*": ["utils/*"],
       "@routes/*": ["routes/*"],
+      "@jobs/*": ["jobs/*"],
       "@middleware/*": ["middleware/*"]
     },
     "sourceMap": true,

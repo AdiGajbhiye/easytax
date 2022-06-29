@@ -4,8 +4,12 @@ import { Request, Response } from "express";
 import { getBalance } from "@services/exchange";
 import { ExchangeId } from "ccxt";
 import { getPricesInFiat } from "@services/coinMarketCap";
+import Transaction from "@models/transaction";
 
-const addWallet = async (req: Request<{}, {}, IWallet>, res: Response) => {
+export const addWallet = async (
+  req: Request<{}, {}, IWallet>,
+  res: Response
+) => {
   const _result = WalletValidation.safeParse(req.body);
   if (!_result.success) {
     res.status(400).json({ message: _result.error });
@@ -30,9 +34,22 @@ const updateWallet = async (
   res: Response
 ) => {};
 
-const deleteWallet = async (req: Request<{}, {}, {}>, res: Response) => {};
+export const deleteWallet = async (
+  req: Request<{ id: string }, {}, {}>,
+  res: Response
+) => {
+  try {
+    const walletId = req.params.id;
+    await Transaction.deleteMany({ walletId });
+    await Wallet.deleteOne({ _id: walletId });
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+};
 
-const getWallet = async (req: Request<{}, {}, {}>, res: Response) => {
+export const getWallet = async (req: Request<{}, {}, {}>, res: Response) => {
   try {
     const wallets = await Wallet.find({ userId: res.locals.jwt.id });
     const balances = await Promise.all(
@@ -77,5 +94,3 @@ const getWallet = async (req: Request<{}, {}, {}>, res: Response) => {
     res.sendStatus(500);
   }
 };
-
-export { addWallet, getWallet };
