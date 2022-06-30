@@ -3,9 +3,9 @@ import Transaction from "@models/transaction";
 import Wallet from "@models/wallet";
 import { Trade } from "ccxt";
 
-export const syncAllTransactions = async () => {
+export const syncTransactionsByUserId = async (userId: string) => {
   try {
-    const wallets = await Wallet.find();
+    const wallets = await Wallet.find({ userId });
 
     const symbolsMap: { [k: string]: string[] } = {};
     for (const w of wallets) {

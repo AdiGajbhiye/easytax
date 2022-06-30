@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { MongoMemoryServer } from "mongodb-memory-server";
-import { syncAllTransactions } from "./syncTransactions";
+import { syncTransactionsByUserId } from "./syncTransactions";
 import Wallet from "@models/wallet";
 import Transaction from "@models/transaction";
 import { exchangeConfig, userConfig } from "@config/testConfig";
@@ -18,14 +18,14 @@ afterAll(async () => {
   await mongod.stop();
 });
 
-test("syncAllTransactions", async () => {
+test("syncTransactionsByUserId", async () => {
   await Wallet.create({
     userId: userConfig.userId,
     walletType: exchangeConfig.exchangeId,
     publicAddress: exchangeConfig.config.apiKey,
     secret: exchangeConfig.config.secret,
   });
-  await syncAllTransactions();
+  await syncTransactionsByUserId(userConfig.userId);
   const transactions = await Transaction.find();
   console.log(transactions);
 });
