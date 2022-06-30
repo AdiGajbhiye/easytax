@@ -5,7 +5,7 @@ import Wallet from "@models/wallet";
 import Transaction from "@models/transaction";
 import { exchangeConfig, userConfig } from "@config/testConfig";
 
-jest.setTimeout(10000);
+jest.setTimeout(50000);
 let mongod: MongoMemoryServer;
 
 beforeAll(async () => {
