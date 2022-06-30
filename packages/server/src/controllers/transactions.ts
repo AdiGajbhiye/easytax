@@ -1,22 +1,10 @@
 import Transaction from "@models/transaction";
-import { CronJob } from "cron";
 import { Request, Response } from "express";
-import dayjs from "dayjs";
 import { syncTransactionsByUserId } from "@jobs/syncTransactions";
+import { scheduleNow } from "@utils/scheduler";
 
 const syncTransactions = async (req: Request, res: Response) => {
-  const cronExpression = dayjs().add(5, "s").toDate();
-  new CronJob(
-    cronExpression,
-    () => {
-      console.log("this is job on tick");
-      syncTransactionsByUserId(res.locals.jwt.id);
-    },
-    () => {
-      console.log("this is job on complete");
-    },
-    true
-  );
+  scheduleNow(() => syncTransactionsByUserId(res.locals.jwt.id));
   res.sendStatus(200);
 };
 
