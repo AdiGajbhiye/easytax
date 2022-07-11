@@ -11,6 +11,7 @@ import Signup from '@pages/Signup';
 import Transaction from '@pages/Transaction';
 import Wallet from '@pages/Wallet';
 import { authService } from '@service/auth';
+import Test from '@pages/Test';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           element={authService.state.value === 'loggedOut' ? <Login /> : <Navigate to="/" replace />}
         />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
     </HistoryRouter>
   );
